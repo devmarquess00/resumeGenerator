@@ -15,7 +15,7 @@ import { Input } from "../input";
 
 export const ComponentExperience = () => {
   const [experience, setExperience] = useState([{}]);
-  const { steps, handlePrev, handleNext, stepState } = useContext(ContextStep);
+  const { steps, handlePrev, handleNext, stepState, handleVisualationResume } = useContext(ContextStep);
 
   const handleButton = () => {
     setExperience((prevExperience) => [...prevExperience, {}])
@@ -33,7 +33,7 @@ export const ComponentExperience = () => {
         <div className="bg-blue-100 rounded-t-sm">
           <Title
             title="3.1 Experiência"
-            extraClass="text-xl mb-5 py-3 px-10 text-zinc-700"
+            extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
         <div>
@@ -100,7 +100,7 @@ export const ComponentExperience = () => {
         <div className="bg-blue-100 rounded-t-sm">
           <Title
             title="3.2 Atividades complementares"
-            extraClass="text-xl mb-5 py-3 px-10 text-zinc-700"
+            extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
         <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
@@ -134,7 +134,8 @@ export const ComponentExperience = () => {
             label="Pré Visualizar"
             icon={<FaClipboardList size={22} />}
             iconPosition="left"
-            extraClass="bg-blue-500 rounded-sm py-3 px-3.5 text-white lg:w-[30%]"
+            extraClass="bg-blue-500 rounded-sm py-3 px-3.5 text-white w-[55%] lg:w-[30%]"
+            onClick={handleVisualationResume}
           />
         </div>
       </div>

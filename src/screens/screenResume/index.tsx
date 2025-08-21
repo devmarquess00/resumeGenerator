@@ -15,6 +15,7 @@ import { ComponentData } from "@/components/componentData";
 import { ComponentAcademic } from "@/components/componentAcademic";
 import { ComponentExperience } from "@/components/componentExperience";
 import { ComponentAdds } from "@/components/componentAdds/indext";
+import { VisualationResume } from "@/components/visualationResume";
 
 export const ScreenResume = () => {
 

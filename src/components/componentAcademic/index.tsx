@@ -17,7 +17,7 @@ import { ContextStep } from "@/context/ContextStep";
 export const ComponentAcademic = () => {
   const [cursos, setCursos] = useState([{}]);
 
-  const { steps , handlePrev, handleNext, stepState } = useContext(ContextStep); 
+  const { steps , handlePrev, handleNext, stepState, handleVisualationResume } = useContext(ContextStep); 
 
   const handleButton = () => {
     setCursos((prevCursos) => [...prevCursos, {}]);
@@ -35,7 +35,7 @@ export const ComponentAcademic = () => {
         <div className="bg-blue-100 rounded-t-sm">
           <Title
             title="2.1 Formação acadêmica"
-            extraClass="text-xl mb-5 py-3 px-10 text-zinc-700"
+            extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
         <div>
@@ -80,7 +80,7 @@ export const ComponentAcademic = () => {
         <div className="bg-blue-100 rounded-t-sm">
           <Title
             title="2.2 Qualificações e Imersões"
-            extraClass="text-xl mb-5 py-3 px-10 text-zinc-700"
+            extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
         <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
@@ -92,7 +92,7 @@ export const ComponentAcademic = () => {
           />
         </div>
       </div>
-      <div className="max-w-xs md:max-w-xl w-full mx-auto mb-10 md:mt-20">
+      <div className="max-w-xs md:max-w-xl w-full mx-auto mb-10 md:mb-20">
         <div className="flex gap-2">
           <Button
             label="Anterior"
@@ -114,7 +114,8 @@ export const ComponentAcademic = () => {
             label="Pré Visualizar"
             icon={<FaClipboardList size={22} />}
             iconPosition="left"
-            extraClass="bg-blue-500 rounded-sm py-3 px-3.5 text-white lg:w-[30%]"
+            extraClass="bg-blue-500 rounded-sm py-3 px-3.5 text-white w-[55%] lg:w-[30%]"
+            onClick={handleVisualationResume}
           />
         </div>
       </div>

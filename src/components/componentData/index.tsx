@@ -4,19 +4,34 @@ import { Input } from "../input";
 import { Textarea } from "../textarea";
 import { Title } from "../title";
 
-import { useContext } from 'react';
+import { useContext } from "react";
 import { ContextStep } from "@/context/ContextStep";
+import { ContextForm } from "@/context/ContextForm";
 
 export const ComponentData = () => {
-    const { stepState, steps, handleNext } = useContext(ContextStep)
+  const { 
+    stepState, 
+    steps, 
+    handleNext, 
+    handleVisualationResume,
+  } = useContext(ContextStep);
+
+  const {
+    name,
+    setName,
+    nationality,
+    setNationality,
+    email,
+    setEmail
+  } = useContext(ContextForm)
 
   return (
     <>
-      <div className="max-w-sm lg:max-w-xl lg:w-full mx-auto mt-20 lg:mt-30 mb-5 shadow-md rounded-sm">
+      <div className="max-w-sm md:max-w-xl lg:w-full mx-auto mt-20 lg:mt-30 mb-5 shadow-md rounded-sm">
         <div className="bg-blue-100 rounded-t-sm">
           <Title
             title="1.1 Dados pessoais"
-            extraClass="text-xl mb-5 py-3 px-10 text-zinc-700"
+            extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
         <div className="w-full grid grid-cols-2 gap-3 mt-10 px-10 pb-8 space-y-3">
@@ -26,6 +41,8 @@ export const ComponentData = () => {
               required={true}
               extraClassLabel="text-sm text-gray-600"
               extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
             />
           </div>
           <Input
@@ -33,12 +50,16 @@ export const ComponentData = () => {
             required={true}
             extraClassLabel="text-sm text-gray-600"
             extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <Input
             label="Nacionalidade"
             required={true}
             extraClassLabel="text-sm text-gray-600"
-            extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm "
+            extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={nationality}
+            onChange={(event) => setNationality(event.target.value)}
           />
           <Input
             label="Idade"
@@ -78,7 +99,7 @@ export const ComponentData = () => {
         <div className="bg-blue-100 rounded-t-sm">
           <Title
             title="1.2 Objetivo"
-            extraClass="text-xl mb-5 py-3 px-10 text-zinc-700"
+            extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
         <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
@@ -91,7 +112,7 @@ export const ComponentData = () => {
         </div>
       </div>
 
-      <div className="max-w-xs md:max-w-xl w-full mx-auto mb-10 md:mt-20">
+      <div className="max-w-xs md:max-w-xl w-full mx-auto mb-10 md:mb-20">
         <div className="flex flex-col gap-2">
           <Button
             label="Seguinte"
@@ -104,7 +125,8 @@ export const ComponentData = () => {
             label="Pré Visualizar"
             icon={<FaClipboardList size={22} />}
             iconPosition="left"
-            extraClass="bg-blue-500 rounded-sm py-3 px-3.5 text-white w-[50%] lg:w-[30%]"
+            extraClass="bg-blue-500 rounded-sm py-3 px-3.5 text-white w-[55%] lg:w-[30%]"
+            onClick={handleVisualationResume}
           />
         </div>
       </div>

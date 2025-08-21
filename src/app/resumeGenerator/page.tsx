@@ -1,4 +1,5 @@
 import { Header } from "@/components/header";
+import { VisualationResume } from "@/components/visualationResume";
 import { ScreenResume } from "@/screens/screenResume";
 
 export default function ResumeGenerator () {
@@ -6,6 +7,7 @@ export default function ResumeGenerator () {
         <div>
             <Header />
             <ScreenResume />
+            <VisualationResume />
         </div>
     )
 }
