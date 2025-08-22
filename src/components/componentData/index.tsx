@@ -9,21 +9,29 @@ import { ContextStep } from "@/context/ContextStep";
 import { ContextForm } from "@/context/ContextForm";
 
 export const ComponentData = () => {
-  const { 
-    stepState, 
-    steps, 
-    handleNext, 
-    handleVisualationResume,
-  } = useContext(ContextStep);
+  const { stepState, steps, handleNext, handleVisualationResume } =
+    useContext(ContextStep);
 
   const {
     name,
     setName,
+    email,
+    setEmail,
     nationality,
     setNationality,
-    email,
-    setEmail
-  } = useContext(ContextForm)
+    age,
+    setAge,
+    gender,
+    setGender,
+    address,
+    setAddress,
+    city,
+    setCity,
+    cep,
+    setCep,
+    state,
+    setState,
+  } = useContext(ContextForm);
 
   return (
     <>
@@ -34,7 +42,7 @@ export const ComponentData = () => {
             extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
-        <div className="w-full grid grid-cols-2 gap-3 mt-10 px-10 pb-8 space-y-3">
+        <div className="w-full grid grid-cols-2 gap-3 mt-10 px-5 md:px-10 pb-8 space-y-3">
           <div className="col-span-2">
             <Input
               label="Nome completo"
@@ -66,12 +74,16 @@ export const ComponentData = () => {
             required={true}
             extraClassLabel="text-sm text-gray-600"
             extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={age}
+            onChange={(event) => setAge(event.target.value)}
           />
           <Input
             label="Genero"
             required={true}
             extraClassLabel="text-sm text-gray-600"
             extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={gender}
+            onChange={(event) => setGender(event.target.value)}
           />
 
           <div className="col-span-2">
@@ -80,6 +92,8 @@ export const ComponentData = () => {
               required={true}
               extraClassLabel="text-sm text-gray-600"
               extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+              value={address}
+              onChange={(event) => setAddress(event.target.value)}
             />
           </div>
           <Input
@@ -87,12 +101,24 @@ export const ComponentData = () => {
             required={true}
             extraClassLabel="text-sm text-gray-600"
             extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={city}
+            onChange={(event) => setCity(event.target.value)}
           />
           <Input
             label="Estado"
             required={true}
             extraClassLabel="text-sm text-gray-600"
             extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={state}
+            onChange={(event) => setState(event.target.value)}
+          />
+          <Input
+            label="CEP"
+            required={true}
+            extraClassLabel="text-sm text-gray-600"
+            extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+            value={cep}
+            onChange={(event) => setCep(event.target.value)}
           />
         </div>
 
@@ -102,7 +128,7 @@ export const ComponentData = () => {
             extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
-        <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
+        <div className="w-full gap-3 mt-5 px-5 md:px-10 pb-8 space-y-3">
           <Textarea
             placeholder="Ex: Busco oportunidade como gerente de loja, para desenvolver minha experiência no setor de vendas."
             label="Indique uma frase curta e direta"

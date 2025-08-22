@@ -18,7 +18,7 @@ export const ComponentAdds = () => {
             extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
-        <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
+        <div className="w-full gap-3 mt-5 px-5 md:px-10 pb-8 space-y-3">
           <Textarea
             placeholder=""
             label="Qualificações e Imersões"

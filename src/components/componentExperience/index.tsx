@@ -11,21 +11,18 @@ import { Textarea } from "../textarea";
 
 import { useContext, useState } from "react";
 import { ContextStep } from "@/context/ContextStep";
+import { ContextForm } from "@/context/ContextForm";
 import { Input } from "../input";
 
 export const ComponentExperience = () => {
-  const [experience, setExperience] = useState([{}]);
   const { steps, handlePrev, handleNext, stepState, handleVisualationResume } = useContext(ContextStep);
 
-  const handleButton = () => {
-    setExperience((prevExperience) => [...prevExperience, {}])
-  }
-
-  const handleRemoveItem = (indexToRemove: any) => {
-    setExperience((prevExperience) => 
-        prevExperience.filter((_,index) => index !== indexToRemove)
-    )
-  }
+  const { 
+    handleInputExperienceChange,
+    handleButtonExperience,
+    handleRemoveItemExperience,
+    experience
+  } = useContext(ContextForm)
 
   return (
     <>
@@ -40,18 +37,20 @@ export const ComponentExperience = () => {
           <div>
             {experience.map((experience, index) => (
               <div
-                className="w-full grid grid-cols-2 gap-3 mt-3 px-10 pt-2 pb-3 space-y-3 border-b border-gray-300"
+                className="w-full grid grid-cols-2 gap-3 mt-3 px-5 md:px-10 pt-2 pb-3 space-y-3 border-b border-gray-300"
                 key={index}>
                 <div className="col-span-2 relative">
                   <Input
-                    label="Curso"
+                    label="Empresa"
                     extraClassLabel="text-sm text-gray-600"
                     extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                    value={experience.enterprise}
+                    onChange={(event) => handleInputExperienceChange(index, "enterprise", event.target.value)}
                   />
                   <Button
                     extraClass="absolute -top-2 right-1 bg-gray-400 p-1 rounded-sm text-white"
                     label={<FaTrash />}
-                    onClick={() => handleRemoveItem(index)}
+                    onClick={() => handleRemoveItemExperience(index)}
                   />
                 </div>
                 <Input
@@ -60,6 +59,8 @@ export const ComponentExperience = () => {
                   placeholder="2024"
                   extraClassLabel="text-sm text-gray-600"
                   extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                  value={experience.startIn}
+                  onChange={(event) => handleInputExperienceChange(index, "startIn", event.target.value)}
                 />
                 <Input
                   label="Fim em"
@@ -67,6 +68,8 @@ export const ComponentExperience = () => {
                   placeholder="2025"
                   extraClassLabel="text-sm text-gray-600"
                   extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                  value={experience.endIn}
+                  onChange={(event) => handleInputExperienceChange(index, "endIn", event.target.value)}
                 />
                 <div className="col-span-2">
                   <Input
@@ -74,6 +77,8 @@ export const ComponentExperience = () => {
                     placeholder="Ex: Gerente de loja"
                     extraClassLabel="text-sm text-gray-600"
                     extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                    value={experience.position}
+                    onChange={(event) => handleInputExperienceChange(index, "position", event.target.value)}
                   />
                 </div>
                 <div className="col-span-2">
@@ -87,13 +92,13 @@ export const ComponentExperience = () => {
               </div>
             ))}
           </div>
-          <div className="px-10 pb-8">
+          <div className="px-5 md:px-10 pb-8">
             <Button
               icon={<FaPlus />}
               iconPosition="left"
-              label="Adicionar outro curso"
+              label="Adicionar outra experiência"
               extraClass="bg-emerald-400 rounded-sm py-2 px-3 text-white mt-3"
-              onClick={handleButton}
+              onClick={handleButtonExperience}
             />
           </div>
         </div>
@@ -103,7 +108,7 @@ export const ComponentExperience = () => {
             extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
-        <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
+        <div className="w-full gap-3 mt-5 px-5 md:px-10 pb-8 space-y-3">
           <Textarea
             placeholder=""
             label="Qualificações e Imersões"

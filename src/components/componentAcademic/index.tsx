@@ -9,25 +9,23 @@ import { Input } from "../input";
 import { Title } from "../title";
 import { Button } from "../button";
 import { Textarea } from "../textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useContext } from 'react';
+import { useContext } from "react";
 import { ContextStep } from "@/context/ContextStep";
+import { ContextForm } from "@/context/ContextForm";
+
+
 
 export const ComponentAcademic = () => {
-  const [cursos, setCursos] = useState([{}]);
-
-  const { steps , handlePrev, handleNext, stepState, handleVisualationResume } = useContext(ContextStep); 
-
-  const handleButton = () => {
-    setCursos((prevCursos) => [...prevCursos, {}]);
-  };
-
-  const handleRemove = (indexToRemove: any) => {
-    setCursos((prevCursos) => 
-      prevCursos.filter((_, index) => index !== indexToRemove)
-    )
-  }
+  const { steps, handlePrev, handleNext, stepState, handleVisualationResume } =
+    useContext(ContextStep);
+  const {
+    handleButton,
+    handleRemove,
+    handleInputChange,
+    cursos
+  } = useContext(ContextForm);
 
   return (
     <>
@@ -41,16 +39,18 @@ export const ComponentAcademic = () => {
         <div>
           {cursos.map((curso, index) => (
             <div
-              className="w-full grid grid-cols-2 gap-3 mt-3 px-10 pt-2 pb-3 space-y-3 border-b border-gray-300"
+              className="w-full grid grid-cols-2 gap-3 mt-3 px-5 md:px-10 pt-2 pb-3 space-y-3 border-b border-gray-300"
               key={index}>
               <div className="col-span-2 relative">
                 <Input
                   label="Curso"
                   extraClassLabel="text-sm text-gray-600"
                   extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                  value={curso.course}
+                  onChange={(event) => handleInputChange(index, "course", event.target.value)}
                 />
                 <Button
-                  extraClass="absolute -top-2 right-1 bg-gray-400 p-1 rounded-sm text-white"
+                  extraClass="absolute -top-2 right-1 bg-gray-400 p-1 rounded-sm text-white outline-none"
                   label={<FaTrash />}
                   onClick={() => handleRemove(index)}
                 />
@@ -59,15 +59,19 @@ export const ComponentAcademic = () => {
                 label="Instituição"
                 extraClassLabel="text-sm text-gray-600"
                 extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                value={curso.institution}
+                onChange={(event) => handleInputChange(index, "institution", event.target.value)}
               />
               <Input
                 label="Ano de conclusão"
                 extraClassLabel="text-sm text-gray-600"
                 extraClass="w-full border border-gray-300 p-2 outline-none rounded-sm"
+                value={curso.completionYear}
+                onChange={(event) => handleInputChange(index, "completionYear", event.target.value)}
               />
             </div>
           ))}
-          <div className="px-10 pb-8">
+          <div className="px-5 md:px-10 pb-8">
             <Button
               onClick={handleButton}
               icon={<FaPlus />}
@@ -83,7 +87,7 @@ export const ComponentAcademic = () => {
             extraClass="mb-5 py-3 px-10 text-zinc-700"
           />
         </div>
-        <div className="w-full gap-3 mt-5 px-10 pb-8 space-y-3">
+        <div className="w-full gap-3 mt-5 px-5 md:px-10 pb-8 space-y-3">
           <Textarea
             placeholder=""
             label="Qualificações e Imersões"
